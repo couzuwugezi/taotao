@@ -8,6 +8,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author liqiang
@@ -98,13 +100,33 @@ public class LoginController {
         return obj;
     }
 
+    /**
+     * @param username
+     * @Cacheable 先查询对应缓存, 如果存在就不执行方法,直接返回缓存里的值,如果不存在就执行方法,将返回值缓存起来
+     */
     @GetMapping(value = "/getUser/{username}")
     @ResponseBody
     @Cacheable(cacheNames = "user", key = "#root.args[0]")
-    public List<SysUserInfo> getUser(@PathVariable("username") String username) {
+    public SysUserInfo getUser(@PathVariable("username") String username) {
         SysUserInfo check = new SysUserInfo();
         check.setLoginName(username);
-        return sysUserInfoDao.queryAll(check);
+        return Optional.ofNullable(sysUserInfoDao.queryAll(check)).map(list -> list.get(0)).orElse(null);
+    }
+
+    /**
+     * @param info
+     * @CachePut 注解:先调用方法,再更新缓存
+     */
+    @PostMapping(value = "/updateUser")
+    @ResponseBody
+    @CachePut(cacheNames = "user", key = "#info.loginName")
+    public SysUserInfo updateUser(SysUserInfo info) {
+        info.setUpdateTime(new Date());
+        sysUserInfoDao.update(info);
+        SysUserInfo select = new SysUserInfo();
+        select.setId(info.getId());
+        return Optional.ofNullable(sysUserInfoDao.queryAll(select)).map(list -> list.get(0)).orElse(null);
+
     }
 
 }
