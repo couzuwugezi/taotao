@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.taotao.dao.SysUserInfoDao">
+
+    <resultMap type="com.springboot.taotao.entity.SysUserInfo" id="SysUserInfoMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="loginName" column="LOGIN_NAME" jdbcType="VARCHAR"/>
+        <result property="realName" column="REAL_NAME" jdbcType="VARCHAR"/>
+        <result property="phone" column="PHONE" jdbcType="VARCHAR"/>
+        <result property="sex" column="SEX" jdbcType="VARCHAR"/>
+        <result property="depId" column="DEP_ID" jdbcType="INTEGER"/>
+        <result property="userStatus" column="USER_STATUS" jdbcType="VARCHAR"/>
+        <result property="isStart" column="IS_START" jdbcType="VARCHAR"/>
+        <result property="creatTime" column="CREAT_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="loginPassword" column="LOGIN_PASSWORD" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysUserInfoMap">
+        select
+          ID, LOGIN_NAME, REAL_NAME, PHONE, SEX, DEP_ID, USER_STATUS, IS_START, CREAT_TIME, UPDATE_TIME, LOGIN_PASSWORD
+        from own.SYS_USER_INFO
+        <where>
+            <if test="id != null">
+                and ID = #{id}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysUserInfoMap">
+        select
+        ID, LOGIN_NAME, REAL_NAME, PHONE, SEX, DEP_ID, USER_STATUS, IS_START, CREAT_TIME, UPDATE_TIME, LOGIN_PASSWORD
+        from own.SYS_USER_INFO
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SysUserInfoMap">
+        select
+          ID, LOGIN_NAME, REAL_NAME, PHONE, SEX, DEP_ID, USER_STATUS, IS_START, CREAT_TIME, UPDATE_TIME, LOGIN_PASSWORD
+        from own.SYS_USER_INFO
+        <where>
+            <if test="id != null">
+                and ID = #{id}
+            </if>
+            <if test="loginName != null and loginName != ''">
+                and LOGIN_NAME = #{loginName}
+            </if>
+            <if test="realName != null and realName != ''">
+                and REAL_NAME = #{realName}
+            </if>
+            <if test="phone != null and phone != ''">
+                and PHONE = #{phone}
+            </if>
+            <if test="sex != null and sex != ''">
+                and SEX = #{sex}
+            </if>
+            <if test="depId != null">
+                and DEP_ID = #{depId}
+            </if>
+            <if test="userStatus != null and userStatus != ''">
+                and USER_STATUS = #{userStatus}
+            </if>
+            <if test="isStart != null and isStart != ''">
+                and IS_START = #{isStart}
+            </if>
+            <if test="creatTime != null">
+                and CREAT_TIME = #{creatTime}
+            </if>
+            <if test="updateTime != null">
+                and UPDATE_TIME = #{updateTime}
+            </if>
+            <if test="loginPassword != null and loginPassword != ''">
+                and LOGIN_PASSWORD = #{loginPassword}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into own.SYS_USER_INFO(LOGIN_NAME, REAL_NAME, PHONE, SEX, DEP_ID, USER_STATUS, IS_START, CREAT_TIME, UPDATE_TIME, LOGIN_PASSWORD)
+        values (#{loginName}, #{realName}, #{phone}, #{sex}, #{depId}, #{userStatus}, #{isStart}, #{creatTime}, #{updateTime}, #{loginPassword})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update own.SYS_USER_INFO
+        <set>
+            <if test="loginName != null and loginName != ''">
+                and LOGIN_NAME = #{loginName}
+            </if>
+            <if test="realName != null and realName != ''">
+                and REAL_NAME = #{realName}
+            </if>
+            <if test="phone != null and phone != ''">
+                and PHONE = #{phone}
+            </if>
+            <if test="sex != null and sex != ''">
+                and SEX = #{sex}
+            </if>
+            <if test="depId != null">
+                and DEP_ID = #{depId}
+            </if>
+            <if test="userStatus != null and userStatus != ''">
+                and USER_STATUS = #{userStatus}
+            </if>
+            <if test="isStart != null and isStart != ''">
+                and IS_START = #{isStart}
+            </if>
+            <if test="creatTime != null">
+                and CREAT_TIME = #{creatTime}
+            </if>
+            <if test="updateTime != null">
+                and UPDATE_TIME = #{updateTime}
+            </if>
+            <if test="loginPassword != null and loginPassword != ''">
+                and LOGIN_PASSWORD = #{loginPassword}
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from own.SYS_USER_INFO where ID = #{id}
+    </delete>
+
+</mapper>

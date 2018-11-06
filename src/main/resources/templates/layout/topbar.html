@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<el-header style="height: 50px;background-color: #F2F5F4; border-bottom: 1px solid #DDE6E9;" th:fragment="topbar">
+    欢迎你:<span th:text="${session.loginname}"></span>
+    <el-button type="success" icon="el-icon-back" @click="logout" style="float: right;margin-top: 10px"
+               size="mini">退出
+    </el-button>
+</el-header>
+</body>
+</html>
