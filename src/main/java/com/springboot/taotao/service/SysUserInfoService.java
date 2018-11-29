@@ -35,7 +35,7 @@ public interface SysUserInfoService {
      * @param sysUserInfo 实例对象
      * @return 实例对象
      */
-    SysUserInfo insert(SysUserInfo sysUserInfo);
+    SysUserInfo insert(SysUserInfo sysUserInfo) throws Exception;
 
     /**
      * 根据给定字段查询数据

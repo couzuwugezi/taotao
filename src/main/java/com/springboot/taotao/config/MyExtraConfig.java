@@ -22,8 +22,6 @@ public class MyExtraConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/").setViewName("login");
-//        registry.addViewController("/login*").setViewName("login");
         registry.addViewController("/error").setViewName("/main/resources/templates/error/404.html");
     }
 
@@ -37,7 +35,7 @@ public class MyExtraConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-        List<String> pattens = Arrays.asList("/druid/*", "/checkInfo*", "/login*", "/**/*.js", "/**/*.css", "/**/fonts/*", "/error", "/", "/favicon.ico");
+        List<String> pattens = Arrays.asList("/register", "/druid/*", "/checkInfo*", "/login*", "/**/*.js", "/**/*.css", "/**/fonts/*", "/error", "/", "/favicon.ico");
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(pattens);
     }
 

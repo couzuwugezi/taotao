@@ -5,8 +5,12 @@
     <title></title>
 </head>
 <body>
-<el-header style="height: 50px;background-color: #F2F5F4; border-bottom: 1px solid #DDE6E9;" th:fragment="topbar">
+<el-header id="header" style="height: 50px;background-color: #F2F5F4; border-bottom: 1px solid #DDE6E9;"
+           th:fragment="topbar">
     欢迎你:<span th:text="${session.loginname}"></span>
+    <el-button type="success" icon="el-icon-back" @click="deleteUser" style="float: right;margin-top: 10px"
+               size="mini">删除
+    </el-button>
     <el-button type="success" icon="el-icon-back" @click="logout" style="float: right;margin-top: 10px"
                size="mini">退出
     </el-button>

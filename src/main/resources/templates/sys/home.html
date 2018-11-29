@@ -7,18 +7,20 @@
     <script th:src="@{/js/basic/elementUI.js}"></script>
     <link type="text/css" rel="stylesheet" th:href="@{/css/basic/emelemtUI.css}"/>
     <script th:src="@{/js/basic/projectInfo.js}"></script>
+    <script th:src="@{/js/sys/topbar.js}"></script>
     <script th:src="@{/js/sys/logout.js}"></script>
     <title>首页</title>
 </head>
 <body style="margin: 0 0 0 0;">
-<div id="app" style="position: relative; height: 100%; width: 100%;">
-    <el-container>
+<div>
+    <div class="app-container">
         <div th:replace="~{layout/topbar :: topbar}"></div>
-        <el-container>
+        <div style="display: block;">
             <div th:replace="~{layout/asideBar :: aside}"></div>
-            <el-main style="margin-left: 170px;background-color: #ffffff">Main</el-main>
-        </el-container>
-    </el-container>
+            <div id="content">
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

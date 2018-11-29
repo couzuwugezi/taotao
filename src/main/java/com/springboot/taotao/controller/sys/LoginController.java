@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,7 +30,7 @@ import java.util.Optional;
 /**
  * @author liqiang
  * 时间 2018-10-31 22:24
- * 描述 登录controller
+ * 描述 登录页面controller
  */
 @Controller
 public class LoginController {
@@ -79,7 +80,7 @@ public class LoginController {
 
     @PostMapping(value = "/register")
     @ResponseBody
-    public JSONObject register(SysUserInfo info, ModelMap map) {
+    public JSONObject register(@RequestBody SysUserInfo info) {
         JSONObject obj = new JSONObject();
         try {
             SysUserInfo check = new SysUserInfo();
@@ -90,7 +91,7 @@ public class LoginController {
                 return obj;
             }
             info.setIsStart("1");
-            info.setUpdateTime(new Date());
+            info.setCreatTime(new Date());
             info.setUserStatus("1");
             SysUserInfo insert = sysUserInfoService.insert(info);
             if (insert.getId() != null) {
@@ -99,7 +100,7 @@ public class LoginController {
                 obj.put("msg", "注册失败");
             }
         } catch (Exception e) {
-            map.put("error", "系统错误");
+            obj.put("msg", "系统错误");
             logger.error(e.getMessage());
         }
         return obj;
@@ -111,11 +112,16 @@ public class LoginController {
      */
     @GetMapping(value = "/getUser/{username}")
     @ResponseBody
-    @Cacheable(cacheNames = "user", key = "#root.args[0]")
+    @Cacheable(cacheNames = "user", key = "#root.args[0]", condition = "#result != null ")
     public SysUserInfo getUser(@PathVariable("username") String username) {
+        System.out.println("没缓存就查询数据库");
         SysUserInfo check = new SysUserInfo();
         check.setLoginName(username);
-        return Optional.ofNullable(sysUserInfoService.queryAll(check)).map(list -> list.get(0)).orElse(null);
+        List<SysUserInfo> infos = sysUserInfoService.queryAll(check);
+        if (CollectionUtils.isNotEmpty(infos)) {
+            return infos.get(0);
+        }
+        return null;
     }
 
     /**

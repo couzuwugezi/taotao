@@ -33,21 +33,22 @@ $(document).ready(function () {
                 label: '女'
             }],
             rules: {
-                loginName: [
-                    {required: true, message: '该项不能为空', trigger: 'blur'},
-                    {min: 1, max: 20, message: '长度在 1 到 50 个字符', trigger: 'blur'},
-                    {
-                        validator: function (rule, value, callback) {
-                            let zzjgdmRegex = /^(\w|[0-9])*$/;
-                            if (!zzjgdmRegex.test(value)) {
-                                callback(new Error('只能输入英文和数字！'))
-                            } else {
-                                callback();
-                            }
-                        },
-                        trigger: 'blur'
-                    }
-                ],
+                loginName:
+                    [
+                        {required: true, message: '该项不能为空', trigger: 'blur'},
+                        {min: 1, max: 20, message: '长度在 1 到 50 个字符', trigger: 'blur'},
+                        {
+                            validator: function (rule, value, callback) {
+                                let zzjgdmRegex = /^(\w|[0-9])*$/;
+                                if (!zzjgdmRegex.test(value)) {
+                                    callback(new Error('只能输入英文和数字！'))
+                                } else {
+                                    callback();
+                                }
+                            },
+                            trigger: 'blur'
+                        }
+                    ],
                 realName:
                     [
                         {required: true, message: '该项不能为空', trigger: 'blur'},
@@ -103,12 +104,13 @@ $(document).ready(function () {
                             async: false,
                             contentType: "application/json",
                             success: function (response) {
+                                var data = JSON.parse(JSON.stringify(response));
                                 dialog.form = {};
                                 dialog.show = false;
-                                dialog.$alert(response.msg);
+                                dialog.$message(data.msg);
                             },
                             error: function (error) {
-                                dialog.$alert("系统异常!");
+                                dialog.$message("系统异常!");
                                 console.log(error);
                             }
                         })

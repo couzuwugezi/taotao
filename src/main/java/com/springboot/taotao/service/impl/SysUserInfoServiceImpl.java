@@ -29,7 +29,7 @@ public class SysUserInfoServiceImpl implements SysUserInfoService {
      */
     @Override
     public SysUserInfo queryById(Integer id) {
-        return this.sysUserInfoDao.queryById(id);
+        return sysUserInfoDao.queryById(id);
     }
 
     /**
@@ -41,7 +41,7 @@ public class SysUserInfoServiceImpl implements SysUserInfoService {
      */
     @Override
     public List<SysUserInfo> queryAllByLimit(int offset, int limit) {
-        return this.sysUserInfoDao.queryAllByLimit(offset, limit);
+        return sysUserInfoDao.queryAllByLimit(offset, limit);
     }
 
     /**
@@ -51,8 +51,9 @@ public class SysUserInfoServiceImpl implements SysUserInfoService {
      * @return 实例对象
      */
     @Override
-    public SysUserInfo insert(SysUserInfo sysUserInfo) {
-        this.sysUserInfoDao.insert(sysUserInfo);
+    public SysUserInfo insert(SysUserInfo sysUserInfo) throws Exception {
+        sysUserInfoDao.insert(sysUserInfo);
+        int a = 1 / 0;
         return sysUserInfo;
     }
 
@@ -64,7 +65,7 @@ public class SysUserInfoServiceImpl implements SysUserInfoService {
      */
     @Override
     public List<SysUserInfo> queryAll(SysUserInfo sysUserInfo) {
-        return this.sysUserInfoDao.queryAll(sysUserInfo);
+        return sysUserInfoDao.queryAll(sysUserInfo);
     }
 
     /**
@@ -75,8 +76,8 @@ public class SysUserInfoServiceImpl implements SysUserInfoService {
      */
     @Override
     public SysUserInfo update(SysUserInfo sysUserInfo) {
-        this.sysUserInfoDao.update(sysUserInfo);
-        return this.queryById(sysUserInfo.getId());
+        sysUserInfoDao.update(sysUserInfo);
+        return queryById(sysUserInfo.getId());
     }
 
     /**
@@ -87,6 +88,6 @@ public class SysUserInfoServiceImpl implements SysUserInfoService {
      */
     @Override
     public boolean deleteById(Integer id) {
-        return this.sysUserInfoDao.deleteById(id) > 0;
+        return sysUserInfoDao.deleteById(id) > 0;
     }
 }
