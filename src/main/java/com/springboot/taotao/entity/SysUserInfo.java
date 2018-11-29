@@ -14,59 +14,47 @@ public class SysUserInfo implements Serializable {
     /**
      * 自增主键
      */
-
     private Integer id;
     /**
      * 登录名
      */
-
     private String loginName;
     /**
      * 真实姓名
      */
-
     private String realName;
     /**
      * 手机号码
      */
-
     private String phone;
     /**
      * 性别
      */
-
     private String sex;
     /**
      * 所属部门ID
      */
-
     private Integer depId;
     /**
      * 状态(1:正常,0:删除)
      */
-
     private String userStatus;
     /**
      * 是否启用(1:是,0:否)
      */
-
     private String isStart;
     /**
      * 创建时间
      */
-
     private Date creatTime;
     /**
      * 更新时间
      */
-
     private Date updateTime;
     /**
      * 密码
      */
-
     private String loginPassword;
-
 
     public Integer getId() {
         return id;
