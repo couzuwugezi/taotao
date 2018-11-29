@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Aspect
 @Configuration
-public class LogError {
+public class MyLogError {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 

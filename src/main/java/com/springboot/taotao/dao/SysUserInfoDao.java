@@ -9,7 +9,7 @@ import java.util.List;
  * 用户信息表(SysUserInfo)表数据库访问层
  *
  * @author makejava
- * @since 2018-11-04 22:52:02
+ * @since 2018-11-29 17:24:33
  */
 @Repository
 public interface SysUserInfoDao {
@@ -20,7 +20,7 @@ public interface SysUserInfoDao {
      * @param id 主键
      * @return 实例对象
      */
-    SysUserInfo queryById(Integer id);
+    SysUserInfo queryById(@Param("id") Integer id);
 
     /**
      * 查询指定行数据
@@ -62,6 +62,6 @@ public interface SysUserInfoDao {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(Integer id);
+    int deleteById(@Param("id") Integer id);
 
 }
