@@ -16,20 +16,22 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        String urlString = request.getRequestURI();
-        if (urlString.endsWith("checkInfo")) {
-            return true;
-        }
-        Object loginName = request.getSession().getAttribute("loginname");
-        // 请求的路径
-        String contextPath = request.getContextPath();
-        if (loginName == null) {
-            request.getSession().setAttribute("error", "您没有权限访问该页面,请先登录");
-            response.sendRedirect(contextPath + "/");
-            return false;
-        } else {
-            return true;
-        }
+//        String urlString = request.getRequestURI();
+//        if (urlString.endsWith("checkInfo")) {
+//            return true;
+//        }
+//        Object loginName = request.getSession().getAttribute("loginname");
+//        // 请求的路径
+//        String contextPath = request.getContextPath();
+//        if (loginName == null) {
+//            request.getSession().setAttribute("error", "您没有权限访问该页面,请先登录");
+//            response.sendRedirect(contextPath + "/");
+//            return false;
+//        } else {
+//            return true;
+//        }
+
+        return true;
     }
 
     @Override
