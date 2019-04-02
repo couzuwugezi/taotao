@@ -39,7 +39,7 @@ public class TaotaoApplicationTests {
     }
 
     @Test
-    public void contextLoads() throws Exception {
+    public void contextLoads() {
         this.test01();
         SysUserInfo user = myRedisTemplate.opsForValue().get("user");
         System.out.println(user);
